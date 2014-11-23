@@ -210,8 +210,7 @@ Is the Data Set TEa
 ## 4. The original Features.txt
 
 (From features.txt)
-1) Feature Selection 
-=================
+### 1) Feature Selection 
 
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
@@ -272,93 +271,7 @@ The complete list of variables of each feature vector is available in 'features.
 
 
 
-Below is the full features.txt set
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="fBody",replacement=".Frequency.Body.",fixed=FALSE)) 
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="tBody",replacement=".Time.Body.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="tGravity",replacement=".Time.Gravity.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="Body",replacement=".Body.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="mean",replacement=".Mean.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="std",replacement=".StDev.",fixed=FALSE))
-> 
-> ndf
-Source: local data frame [813,621 x 4]
-
-   Subject Activity                           Measurement     value
-1        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2571778
-2        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2860267
-3        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2754848
-4        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2702982
-5        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2748330
-6        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2792199
-7        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2797459
-8        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2746005
-9        2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2725287
-10       2 STANDING .Time..Body...Accelerometer.-.Mean..X 0.2757457
-..     ...      ...                                   ...       ...
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="\\-",replacement="",fixed=FALSE))
-> 
-> ndf
-Source: local data frame [813,621 x 4]
-
-   Subject Activity                          Measurement     value
-1        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2571778
-2        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2860267
-3        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2754848
-4        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2702982
-5        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2748330
-6        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2792199
-7        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2797459
-8        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2746005
-9        2 STANDING .Time..Body...Accelerometer..Mean..X 0.2725287
-10       2 STANDING .Time..Body...Accelerometer..Mean..X 0.2757457
-..     ...      ...                                  ...       ...
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="...",replacement=".",fixed=FALSE)) 
-> 
-> ndf
-Source: local data frame [813,621 x 4]
-
-   Subject Activity  Measurement     value
-1        2 STANDING ............ 0.2571778
-2        2 STANDING ............ 0.2860267
-3        2 STANDING ............ 0.2754848
-4        2 STANDING ............ 0.2702982
-5        2 STANDING ............ 0.2748330
-6        2 STANDING ............ 0.2792199
-7        2 STANDING ............ 0.2797459
-8        2 STANDING ............ 0.2746005
-9        2 STANDING ............ 0.2725287
-10       2 STANDING ............ 0.2757457
-..     ...      ...          ...       ...
-> 
-> ndf <- gather(bigdf, Measurement, value, 3:length(bigdf))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement, pattern="\\(\\)\\-", replacement="."))		
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="Acc",replacement=".Accelerometer.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="Gyro",replacement=".Gyroscope.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="Mag",replacement=".Magnitude.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="Jerk",replacement=".Jerk.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="fBody",replacement=".Frequency.Body.",fixed=FALSE)) 
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="tBody",replacement=".Time.Body.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="tGravity",replacement=".Time.Gravity.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="Body",replacement=".Body.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="mean",replacement=".Mean.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="std",replacement=".StDev.",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="\\-",replacement="",fixed=FALSE))
-> ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="...",replacement=".",fixed=TRUE))
-> ndf
-Source: local data frame [813,621 x 4]
-
-   Subject Activity                        Measurement     value
-1        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2571778
-2        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2860267
-3        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2754848
-4        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2702982
-5        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2748330
-6        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2792199
-7        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2797459
-8        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2746005
-9        2 STANDING .Time..Body.Accelerometer..Mean..X 0.2725287
-10       2 STANDING .Time..Body.Accelerometer..Mean..X 0.2757457
-..     ...      ...                                ...       ...
+2) Here is how I cleaned up the names I cleaned up names
 > 
 > ndf <- gather(bigdf, Measurement, value, 3:length(bigdf))
 > ndf <- mutate(ndf, Measurement = gsub(Measurement, pattern="\\(\\)\\-", replacement="."))		
@@ -429,6 +342,7 @@ Source: local data frame [6 x 4]
 4      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.7263718
 5      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.6894209
 6      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.7451204
+
 > unique(ndf$Measurement)
  [1] "Time.Body.Accelerometer.Mean.X"                            
  [2] "Time.Body.Accelerometer.Mean.Y"                            
@@ -509,19 +423,7 @@ Source: local data frame [6 x 4]
 [77] "Frequency.Body.Body.Accelerometer.Jerk.Magnitude.StDev"    
 [78] "Frequency.Body.Body.Gyroscope.Magnitude.StDev"             
 [79] "Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev"        
-> ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency) {Unit="Frequency", Measurement=substr(Measurement, 11, strlen(Measurement)}))
-Error: unexpected symbol in "ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency) {Unit="Frequency"
-> ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency", Measurement=substr(Measurement, 11, strlen(Measurement)}))
-Error: unexpected ',' in "ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency","
-> ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency"; Measurement=substr(Measurement, 11, strlen(Measurement)}))
-Error: unexpected '}' in "ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency"; Measurement=substr(Measurement, 11, strlen(Measurement)}"
-> ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency"))
-Error: unexpected ')' in "ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency")"
-> ndf2 <- mutate(ndf, if(Measurement[1:9]=="Frequency") {Unit="Frequency"})
-Error: unsupported type for column 'if (Measurement[1:9] == "Frequency") ...' (NILSXP)
-In addition: Warning message:
-In if (c("Time.Body.Accelerometer.Mean.X", "Time.Body.Accelerometer.Mean.X",  :
-  the condition has length > 1 and only the first element will be used
+
 > head(ndf)
 Source: local data frame [6 x 4]
 
@@ -556,51 +458,11 @@ Source: local data frame [6 x 4]
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="^\\.",replacement="",fixed=FALSE)) 
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="\\.$",replacement="",fixed=FALSE)) 
 > 
-> ndf2 <- 
-+     ndf %>%
-+     group_by(Subject, Activity, Measurement) %>%
-+     summarize(average = mean(Value)) %>%
-+     print
-Source: local data frame [14,220 x 4]
-Groups: Subject, Activity
 
-   Subject Activity                                   Measurement     average
-1        1   LAYING Frequency.Body.Accelerometer.Jerk.Mean.Freq.X  0.13241909
-2        1   LAYING Frequency.Body.Accelerometer.Jerk.Mean.Freq.Y  0.02451362
-3        1   LAYING Frequency.Body.Accelerometer.Jerk.Mean.Freq.Z  0.02438795
-4        1   LAYING      Frequency.Body.Accelerometer.Jerk.Mean.X -0.95707388
-5        1   LAYING      Frequency.Body.Accelerometer.Jerk.Mean.Y -0.92246261
-6        1   LAYING      Frequency.Body.Accelerometer.Jerk.Mean.Z -0.94806090
-7        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.X -0.96416071
-8        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Y -0.93221787
-9        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Z -0.96058699
-10       1   LAYING   Frequency.Body.Accelerometer.Magnitude.Mean -0.86176765
-..     ...      ...                                           ...         ...
-> 
-> ndf2
-NULL
-> ndf2 <- ndf %>%
-+     group_by(Subject, Activity, Measurement) %>%
-+     summarize(average = mean(Value)) %>%
-+     print
-Source: local data frame [14,220 x 4]
-Groups: Subject, Activity
-
-   Subject Activity                                   Measurement     average
-1        1   LAYING Frequency.Body.Accelerometer.Jerk.Mean.Freq.X  0.13241909
-2        1   LAYING Frequency.Body.Accelerometer.Jerk.Mean.Freq.Y  0.02451362
-3        1   LAYING Frequency.Body.Accelerometer.Jerk.Mean.Freq.Z  0.02438795
-4        1   LAYING      Frequency.Body.Accelerometer.Jerk.Mean.X -0.95707388
-5        1   LAYING      Frequency.Body.Accelerometer.Jerk.Mean.Y -0.92246261
-6        1   LAYING      Frequency.Body.Accelerometer.Jerk.Mean.Z -0.94806090
-7        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.X -0.96416071
-8        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Y -0.93221787
-9        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Z -0.96058699
-10       1   LAYING   Frequency.Body.Accelerometer.Magnitude.Mean -0.86176765
-..     ...      ...                                           ...         ...
-> ndf2
-NULL
+3) How the final table is made
 > ndf2 <- ndf %>% group_by(Subject, Activity, Measurement) %>% summarize(average = mean(Value)) 
+
+
 > ndf2
 Source: local data frame [14,220 x 4]
 Groups: Subject, Activity
@@ -616,45 +478,7 @@ Groups: Subject, Activity
 8        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Y -0.93221787
 9        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Z -0.96058699
 10       1   LAYING   Frequency.Body.Accelerometer.Magnitude.Mean -0.86176765
-..     ...      ...                                           ...         ...
-> load(file="../project/run_analysis.R")
-Error: bad restore file magic number (file may be corrupted) -- no data loaded
-In addition: Warning message:
-file ‘run_analysis.R’ has magic number '# Des'
-  Use of save versions prior to 2 is deprecated 
-> load(file="../project/run_analysis.R")
-Error: bad restore file magic number (file may be corrupted) -- no data loaded
-In addition: Warning message:
-file ‘run_analysis.R’ has magic number '##  D'
-  Use of save versions prior to 2 is deprecated 
-> source(file="../project/run_analysis.R")
-Error in setwd(dir = "../Desktop/r-dir/cleaning/UCI HAR Dataset/") : 
-  cannot change working directory
-> source(file="../project/run_analysis.R")
-Error in setwd(dir = "../Desktop/r-dir/cleaning/UCI HAR Dataset/") : 
-  cannot change working directory
-> setwd("C:/Users/Boris Kletser/Desktop/r-dir/cleaning/project")
-> source("run_analysis.R")
-Error in setwd(dir = "../Desktop/r-dir/cleaning/UCI HAR Dataset/") : 
-  cannot change working directory
-> source(file="run_analysis.R")
-Error in file(file, "rt") : cannot open the connection
-In addition: Warning message:
-In file(file, "rt") :
-  cannot open file 'features.txt': No such file or directory
-> source(file="run_analysis.R")
-Error in eval(expr, envir, enclos) : object 'features_filtered' not found
-> source(file="run_analysis.R")
-Warning message:
-In rm(subjects_merged, sets_merged) : object 'sets_merged' not found
-> source(file="run_analysis.R")
-> source(file="run_analysis.R")
-> source(file="run_analysis.R")
-Error in source(file = "run_analysis.R") : 
-  run_analysis.R:132:46: unexpected symbol
-131: ## Cleanup
-132: rm(subject_test, sets_merged_filtered_named. subject_train
-                                                  ^
+
 > source(file="run_analysis.R")
 > ndf2
 Source: local data frame [14,220 x 4]
@@ -672,6 +496,7 @@ Groups: Subject, Activity
 9        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Z -0.96058699
 10       1   LAYING   Frequency.Body.Accelerometer.Magnitude.Mean -0.86176765
 ..     ...      ...                                           ...         ...
+
 > tail(ndf2)
 Source: local data frame [6 x 4]
 Groups: Subject, Activity
@@ -683,6 +508,7 @@ Groups: Subject, Activity
 4      30 WALKING_UPSTAIRS Time.Gravity.Accelerometer.StDev.X -0.95403362
 5      30 WALKING_UPSTAIRS Time.Gravity.Accelerometer.StDev.Y -0.91493394
 6      30 WALKING_UPSTAIRS Time.Gravity.Accelerometer.StDev.Z -0.86240279
+
 > summary(ndf2)
     Subject                   Activity    Measurement           average        
  Min.   : 1.0   LAYING            :2370   Length:14220       Min.   :-0.99767  
