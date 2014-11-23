@@ -1,4 +1,4 @@
-### CodeBook
+# CodeBook
 
 ## Components
 This codebook show how I changed the the dataset throughout the assignement.
@@ -13,10 +13,10 @@ At the end of I've included a write.table(ndf2,file="final_results.txt",row.name
 so if you run it, it will create a local output file. If not, I've also 
 included the final_results.zip.
 
-# 1 The transformation
-# 2 Final table overview
-# 3 Key Steps
-# 4 Original/intermediate tables
+### 1 The transformation
+### 2 Final table overview
+### 3 Key Steps
+### 4 Original/intermediate tables
 
 
 ## 1. The transformation
@@ -1346,8 +1346,4 @@ Filtered list before name changes
 517        517       fBodyBodyAccJerkMag-std()
 530        530          fBodyBodyGyroMag-std()
 543        543      fBodyBodyGyroJerkMag-std()
-> 
-
-
-
-#
+>

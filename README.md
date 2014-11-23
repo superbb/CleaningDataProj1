@@ -1,11 +1,13 @@
-### Introduction
+# Introduction
 
 The data set is broken up as follows:
 Training and Test Sets: 'train/X_train.txt' and 'test/X_test.txt'
 Training and Test Labels: 'train/Y_train.txt' and 'test/Y_test.txt' 
 Subjects: 'train/subject_train.txt' and 'test/subject_test.txt'
 
-## The tasks are:
+The tasks are:
+========
+
 1. 	Merge the training and the test sets to create one data set.
 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
 3. Uses descriptive activity names to name the activities in the data set.
@@ -13,10 +15,11 @@ Subjects: 'train/subject_train.txt' and 'test/subject_test.txt'
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ## My approach is as follows:
-1. 	Merge the training and the test sets to create one data set.
+
+### 1. 	Merge the training and the test sets to create one data set.
 	Grab test and training data, then combine it:
 	
-## 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+### 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
 	Grab features names
 	Make list of features that have mean or std in them. 
 	I am not including the angle means because those are operations on something with a mean, not means on an operation.
@@ -24,16 +27,16 @@ Subjects: 'train/subject_train.txt' and 'test/subject_test.txt'
 	Filter merged sets to only show measurements for mean and stdev.
 	Note, unlike the rows with features above, here we're filtering the columns.
 	
-## 3. Uses descriptive activity names to name the activities in the data set.
+### 3. Uses descriptive activity names to name the activities in the data set.
 	Grab activity labels
 	Grab the activity labels for each activity
 	Return activity name when given a number
 	Add the activity names to the data set
 
-## 4. Appropriately labels the data set with descriptive variable names. 
+### 4. Appropriately labels the data set with descriptive variable names. 
 	The names are ready in features_filtered:
 	
-## 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+### 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 	Grab Subject id's:
 		subject_test <- read.table(file = "test/subject_test.txt", header = FALSE, sep = "")
 		subject_train <- read.table(file = "train/subject_train.txt", header = FALSE, sep = "")
@@ -65,6 +68,7 @@ Subjects: 'train/subject_train.txt' and 'test/subject_test.txt'
 
 
 Credits:
+========
 Thank you to the forums, especially these two threads:
 https://class.coursera.org/getdata-009/forum/thread?thread_id=58
 https://class.coursera.org/getdata-009/forum/thread?thread_id=192	
@@ -73,10 +77,11 @@ http://swirlstats.com/
 http://vita.had.co.nz/papers/tidy-data.pdf
 
 
-
 	
 	
 Original Sources:
+========
+
 Descirption
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
