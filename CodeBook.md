@@ -1,6 +1,6 @@
 # CodeBook
 
-## Components
+### Components
 This codebook show how I changed the the dataset throughout the assignement.
 The original data had 561 variables x 10,299 observations.
 With filtering I reduced the number of variables (features) to 79 variables x 10,299 observations.
@@ -13,13 +13,13 @@ At the end of I've included a write.table(ndf2,file="final_results.txt",row.name
 so if you run it, it will create a local output file. If not, I've also 
 included the final_results.zip.
 
-### 1 The transformation
-### 2 Final table overview
-### 3 Key Steps
-### 4 Original/intermediate tables
+##### 1 The transformation
+##### 2 Final table overview
+##### 3 Key Steps
+##### 4 Original/intermediate tables
 
 
-## 1. The transformation
+### 1. The transformation
 The original feature set had 561 values. See 5. below for the full set
    feature_id                          feature   
  Min.   :  1   fBodyAcc-bandsEnergy()-1,16 :  3  
@@ -49,7 +49,7 @@ This cut down the number of items from 561 to 73. See 5. for full list
 				 
 Finally I renamed the columns to be more readable and used group_by and summarize to get the final repor
 				 
-## 2. Final table
+### 2. Final table
 The new table now only has 4 variables is much easier to read.
 
 Source: local data frame [14,220 x 4]
@@ -100,7 +100,7 @@ Classes ‘grouped_df’, ‘tbl_df’, ‘tbl’ and 'data.frame':	14220 obs. o
  
 
 
-## 3. Key Steps:
+### 3. Key Steps:
 1. 	Merge the training and the test sets to create one data set. 
 I used read.table to read in the files and rbind to merge them without losing order.
 
@@ -207,10 +207,11 @@ Is the Data Set TEa
 	
 
 	
-## 4. The original Features.txt
+### 4. The original Features.txt
 
-(From features.txt)
-### 1) Feature Selection 
+1) From features.txt
+`
+Feature Selection 
 
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
@@ -268,10 +269,11 @@ tBodyGyroMean
 tBodyGyroJerkMean
 
 The complete list of variables of each feature vector is available in 'features.txt'
-
+`
 
 
 2) Here is how I cleaned up the names I cleaned up names
+`
 > 
 > ndf <- gather(bigdf, Measurement, value, 3:length(bigdf))
 > ndf <- mutate(ndf, Measurement = gsub(Measurement, pattern="\\(\\)\\-", replacement="."))		
@@ -288,6 +290,9 @@ The complete list of variables of each feature vector is available in 'features.
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="\\-",replacement=""))
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="...",replacement=".",fixed=TRUE)) 
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="..",replacement=".", ,fixed=TRUE))
+`
+
+`
 > ndf
 Source: local data frame [813,621 x 4]
 
@@ -303,6 +308,9 @@ Source: local data frame [813,621 x 4]
 9        2 STANDING .Time.Body.Accelerometer.Mean.X 0.2725287
 10       2 STANDING .Time.Body.Accelerometer.Mean.X 0.2757457
 ..     ...      ...                             ...       ...
+`
+
+`
 > tail(ndf)
 Source: local data frame [6 x 4]
 
@@ -317,6 +325,10 @@ Source: local data frame [6 x 4]
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="()",replacement="", ,fixed=TRUE))
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="^\\.",replacement="",fixed=FALSE)) 
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="\\.$",replacement="",fixed=FALSE)) 
+`
+
+
+`
 > ndf
 Source: local data frame [813,621 x 4]
 
@@ -332,9 +344,11 @@ Source: local data frame [813,621 x 4]
 9        2 STANDING Time.Body.Accelerometer.Mean.X 0.2725287
 10       2 STANDING Time.Body.Accelerometer.Mean.X 0.2757457
 ..     ...      ...                            ...       ...
+`
+
+`
 > tail(ndf)
 Source: local data frame [6 x 4]
-
   Subject         Activity                                        Measurement      value
 1      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.7547290
 2      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.7239514
@@ -342,7 +356,9 @@ Source: local data frame [6 x 4]
 4      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.7263718
 5      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.6894209
 6      30 WALKING_UPSTAIRS Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev -0.7451204
+`
 
+`
 > unique(ndf$Measurement)
  [1] "Time.Body.Accelerometer.Mean.X"                            
  [2] "Time.Body.Accelerometer.Mean.Y"                            
@@ -423,10 +439,10 @@ Source: local data frame [6 x 4]
 [77] "Frequency.Body.Body.Accelerometer.Jerk.Magnitude.StDev"    
 [78] "Frequency.Body.Body.Gyroscope.Magnitude.StDev"             
 [79] "Frequency.Body.Body.Gyroscope.Jerk.Magnitude.StDev"        
-
+`
+`
 > head(ndf)
 Source: local data frame [6 x 4]
-
   Subject Activity                    Measurement     value
 1       2 STANDING Time.Body.Accelerometer.Mean.X 0.2571778
 2       2 STANDING Time.Body.Accelerometer.Mean.X 0.2860267
@@ -434,9 +450,14 @@ Source: local data frame [6 x 4]
 4       2 STANDING Time.Body.Accelerometer.Mean.X 0.2702982
 5       2 STANDING Time.Body.Accelerometer.Mean.X 0.2748330
 6       2 STANDING Time.Body.Accelerometer.Mean.X 0.2792199
+`
+
+`
 > library(dplyr)
 > library(tidyr)
-> 
+`
+
+`
 > bigdf <- tbl_df(full_table)
 > 
 > ndf <- gather(bigdf, Measurement, Value, 3:length(bigdf))
@@ -457,12 +478,15 @@ Source: local data frame [6 x 4]
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="()",replacement="", ,fixed=TRUE))
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="^\\.",replacement="",fixed=FALSE)) 
 > ndf <- mutate(ndf, Measurement = gsub(Measurement,pattern="\\.$",replacement="",fixed=FALSE)) 
-> 
+> `
 
 3) How the final table is made
+
+`
 > ndf2 <- ndf %>% group_by(Subject, Activity, Measurement) %>% summarize(average = mean(Value)) 
+`
 
-
+`
 > ndf2
 Source: local data frame [14,220 x 4]
 Groups: Subject, Activity
@@ -478,7 +502,9 @@ Groups: Subject, Activity
 8        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Y -0.93221787
 9        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Z -0.96058699
 10       1   LAYING   Frequency.Body.Accelerometer.Magnitude.Mean -0.86176765
+`
 
+`
 > source(file="run_analysis.R")
 > ndf2
 Source: local data frame [14,220 x 4]
@@ -496,8 +522,9 @@ Groups: Subject, Activity
 9        1   LAYING     Frequency.Body.Accelerometer.Jerk.StDev.Z -0.96058699
 10       1   LAYING   Frequency.Body.Accelerometer.Magnitude.Mean -0.86176765
 ..     ...      ...                                           ...         ...
+`
 
-> tail(ndf2)
+`> tail(ndf2)
 Source: local data frame [6 x 4]
 Groups: Subject, Activity
 
@@ -508,7 +535,8 @@ Groups: Subject, Activity
 4      30 WALKING_UPSTAIRS Time.Gravity.Accelerometer.StDev.X -0.95403362
 5      30 WALKING_UPSTAIRS Time.Gravity.Accelerometer.StDev.Y -0.91493394
 6      30 WALKING_UPSTAIRS Time.Gravity.Accelerometer.StDev.Z -0.86240279
-
+`
+`
 > summary(ndf2)
     Subject                   Activity    Measurement           average        
  Min.   : 1.0   LAYING            :2370   Length:14220       Min.   :-0.99767  
@@ -517,6 +545,9 @@ Groups: Subject, Activity
  Mean   :15.5   WALKING           :2370                      Mean   :-0.41241  
  3rd Qu.:23.0   WALKING_DOWNSTAIRS:2370                      3rd Qu.:-0.03654  
  Max.   :30.0   WALKING_UPSTAIRS  :2370                      Max.   : 0.97451  
+`
+ 
+`
 > str(ndf2)
 Classes ‘grouped_df’, ‘tbl_df’, ‘tbl’ and 'data.frame':	14220 obs. of  4 variables:
  $ Subject    : int  1 1 1 1 1 1 1 1 1 1 ...
@@ -527,6 +558,9 @@ Classes ‘grouped_df’, ‘tbl_df’, ‘tbl’ and 'data.frame':	14220 obs. o
   ..$ : symbol Subject
   ..$ : symbol Activity
  - attr(*, "drop")= logi TRUE
+`
+ 
+`
 > features
     feature_id                              feature
 1            1                    tBodyAcc-mean()-X
@@ -1090,9 +1124,10 @@ Classes ‘grouped_df’, ‘tbl_df’, ‘tbl’ and 'data.frame':	14220 obs. o
 559        559                 angle(X,gravityMean)
 560        560                 angle(Y,gravityMean)
 561        561                 angle(Z,gravityMean)
+`
 
 Filtered list before name changes
-    feature_id                         feature
+`    feature_id                         feature
 1            1               tBodyAcc-mean()-X
 2            2               tBodyAcc-mean()-Y
 3            3               tBodyAcc-mean()-Z
@@ -1172,4 +1207,4 @@ Filtered list before name changes
 517        517       fBodyBodyAccJerkMag-std()
 530        530          fBodyBodyGyroMag-std()
 543        543      fBodyBodyGyroJerkMag-std()
->
+>`
