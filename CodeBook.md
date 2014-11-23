@@ -1,22 +1,64 @@
 # CodeBook
 
 ### Components
-This codebook show how I changed the the dataset throughout the assignement.
-The original data had 561 variables x 10,299 observations.
-With filtering I reduced the number of variables (features) to 79 variables x 10,299 observations.
-I then grouped the feature names into a single row, 4 variables and 813,621 observations.
-I then ran averages on them grouped by measurement, and got a set that's 14220x4 rows.
+##### 1 The variables
+##### 2 Summary
+##### 3 Is the data tidy
+##### 4 The transformation
+##### 5 Final table overview
+##### 6 Key steps
+##### 7 Original/intermediate tables
 
-To see the final results just run run_analysis.R. 
-It's meant to work in a folder where the data set is a subfolder. 
-At the end of I've included a write.table(ndf2,file="final_results.txt",row.names = FALSE),
-so if you run it, it will create a local output file. If not, I've also 
-included the final_results.zip.
+### 1. Variables. 
+	The following list is in chronological order. Most important are last. 
+	Many of these variables could have been recycled, but I thought it
+	would be clearer to follow if I left them separate for easier tracing.
+	The runcleanup variable can erase old values if system resources are lacking
+		Variable	| Description
+		--- | --- | ---
+		runcleanup 	| A variable to erase data tables after no longer using them
+		X_test		| data of test sets, pulled from test/X_test.txt, contains values for all feature columns
+		X_train		| data of train sets, pulled from train/X_train.txt, 
+		sets_merged	| X_test and X_trained combined
+		features	| table of feature names pulled from features.txt, contains id and name
+		features_mean	| all features containing the string "mean"
+		features_std	| all features containing the string "std"
+		features_filtered	| features_mean and features_std combined, these are the only values we care about
+		sets_merged_filtered	| sets_merged table but with only the features_filtered rows selected
+		activity_names	| list of activity names and id's
+		activity_name(key)	| functions which takes in a value and returns the activity name
+		Y_test		| id's of the Activity that X_test has value for, pulled from test/Y_test.txt
+		Y_train		| id's of the Activity that X_train has value for , pulled from train/Y_train.txt
+		labels_merged	| id's of both X_test and X_train in same order as the sets_merged tables
+		labels_merged_named	| same list as labels_merged, but now with names attacked
 
-In looking at the final results, I wanted to make sure the data set was tidy. Here is my reasoning
-on it
+		sets_merged_filtered_named | our filtered data file, but now with readable column names
 
-### Is the Data Set TIDY?
+		subject_test	| id's of subjects corresponding to X_test, pulled from test/subject_test.txt
+		subject_train	| id's of subjects corresponding to X_train, pulled from train/subject_train.txt
+		full_table		| data table combining subjects, activities, and measurements, with nice names, filtered by the activities we care about
+		bigdf			| dplyr data file of full_table for easier manipulation
+		ndf				| transformed full data set with all Measurements gathered into one column, and names made even more readable
+		ndf2			| final data set with subject, activity, and average of each measurement we care about
+
+### 2. Summary
+
+	This codebook show how I changed the the dataset throughout the assignement.
+	The original data had 561 variables x 10,299 observations.
+	With filtering I reduced the number of variables (features) to 79 variables x 10,299 observations.
+	I then grouped the feature names into a single row, 4 variables and 813,621 observations.
+	I then ran averages on them grouped by measurement, and got a set that's 14220x4 rows.
+
+	To see the final results just run run_analysis.R. 
+	It's meant to work in a folder where the data set is a subfolder. 
+	At the end of I've included a write.table(ndf2,file="final_results.txt",row.names = FALSE),
+	so if you run it, it will create a local output file. If not, I've also 
+	included the final_results.zip.
+
+	In looking at the final results, I wanted to make sure the data set was tidy. Here is my reasoning
+	on it
+
+### 3. Is the Data Set TIDY?
 
 	Data Set Must Be Tidy:
 	1. Each variable forms a column.
@@ -29,17 +71,7 @@ on it
 
 	Yes! =)
 
-
-##### 1 The transformation
-
-##### 2 Final table overview
-
-##### 3 Key Steps
-
-##### 4 Original/intermediate tables
-
-
-### 1. The transformation
+### 4. The transformation
 
 	The original feature set had 561 values. See 5. below for the full set
 ```
@@ -73,7 +105,7 @@ on it
 
 	Finally I renamed the columns to be more readable and used group_by and summarize to get the final repor
 				 
-### 2. Final table
+### 5. Final table overview
 	The new table now only has 4 variables is much easier to read.
 ```
 		Source: local data frame [14,220 x 4]
@@ -129,7 +161,7 @@ on it
 ```
 
 
-### 3. Key Steps:
+### 6. Key Steps:
 	1. 	Merge the training and the test sets to create one data set. 
 		I used read.table to read in the files and rbind to merge them without losing order.
 ```
@@ -222,7 +254,7 @@ on it
 ```
 
 		
-### 4. The original Features.txt
+### 7. The original Features.txt
 
 	1) From features.txt
 	
