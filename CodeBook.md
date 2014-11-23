@@ -14,32 +14,32 @@
 	Many of these variables could have been recycled, but I thought it
 	would be clearer to follow if I left them separate for easier tracing.
 	The runcleanup variable can erase old values if system resources are lacking
-		Variable	| Description
-		--- | --- | ---
-		runcleanup 	| A variable to erase data tables after no longer using them
-		X_test		| data of test sets, pulled from test/X_test.txt, contains values for all feature columns
-		X_train		| data of train sets, pulled from train/X_train.txt, 
-		sets_merged	| X_test and X_trained combined
-		features	| table of feature names pulled from features.txt, contains id and name
-		features_mean	| all features containing the string "mean"
-		features_std	| all features containing the string "std"
-		features_filtered	| features_mean and features_std combined, these are the only values we care about
-		sets_merged_filtered	| sets_merged table but with only the features_filtered rows selected
-		activity_names	| list of activity names and id's
-		activity_name(key)	| functions which takes in a value and returns the activity name
-		Y_test		| id's of the Activity that X_test has value for, pulled from test/Y_test.txt
-		Y_train		| id's of the Activity that X_train has value for , pulled from train/Y_train.txt
-		labels_merged	| id's of both X_test and X_train in same order as the sets_merged tables
-		labels_merged_named	| same list as labels_merged, but now with names attacked
 
-		sets_merged_filtered_named | our filtered data file, but now with readable column names
+Variable | Description
+--- | ---
+runcleanup | A variable to erase data tables after no longer using them
+X_test | data of test sets, pulled from test/X_test.txt, contains values for all feature columns
+X_train | data of train sets, pulled from train/X_train.txt, 
+sets_merged | X_test and X_trained combined
+features | table of feature names pulled from features.txt, contains id and name
+features_mean | all features containing the string "mean"
+features_std | all features containing the string "std"
+features_filtered | features_mean and features_std combined, these are the only values we care about
+sets_merged_filtered | sets_merged table but with only the features_filtered rows selected
+activity_names | list of activity names and id's
+activity_name(key) | functions which takes in a value and returns the activity name
+Y_test | id's of the Activity that X_test has value for, pulled from test/Y_test.txt
+Y_train | id's of the Activity that X_train has value for , pulled from train/Y_train.txt
+labels_merged | id's of both X_test and X_train in same order as the sets_merged tables
+labels_merged_named | same list as labels_merged, but now with names attacked
+sets_merged_filtered_named | our filtered data file, but now with readable column names
+subject_test | id's of subjects corresponding to X_test, pulled from test/subject_test.txt
+subject_train | id's of subjects corresponding to X_train, pulled from train/subject_train.txt
+full_table | data table combining subjects, activities, and measurements, with nice names, filtered by the activities we care about
+bigdf | dplyr data file of full_table for easier manipulation
+ndf | transformed full data set with all Measurements gathered into one column, and names made even more readable
+ndf2 | final data set with subject, activity, and average of each measurement we care about
 
-		subject_test	| id's of subjects corresponding to X_test, pulled from test/subject_test.txt
-		subject_train	| id's of subjects corresponding to X_train, pulled from train/subject_train.txt
-		full_table		| data table combining subjects, activities, and measurements, with nice names, filtered by the activities we care about
-		bigdf			| dplyr data file of full_table for easier manipulation
-		ndf				| transformed full data set with all Measurements gathered into one column, and names made even more readable
-		ndf2			| final data set with subject, activity, and average of each measurement we care about
 
 ### 2. Summary
 
